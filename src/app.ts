@@ -1,5 +1,6 @@
 
 import express from "express";
+import consultorioRouter from "./routers/consultorio.router";
 
 const app = express();
 const PORT = 3000;
@@ -12,7 +13,8 @@ app.get("/", (_req, res) => {
     estado: "funcionando"
   });
 });
-
+// Rutas de Consultorios
+app.use("/api/consultorios", consultorioRouter);
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });
