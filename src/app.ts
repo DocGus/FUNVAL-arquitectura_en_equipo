@@ -1,10 +1,12 @@
 
 import express from "express";
+import medicoRouter from "./routers/medico.router";
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use("/medicos", medicoRouter);
 
 app.get("/", (_req, res) => {
   res.json({
