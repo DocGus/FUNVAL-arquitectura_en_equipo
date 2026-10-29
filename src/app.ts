@@ -1,8 +1,11 @@
 
 import express from "express";
 import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "./swagger";
+
 import citasRouter from "./routers/citas.router";
+import { swaggerDocument } from "./docs/swagger";
+
+import { swaggerSpec } from "./swagger";
 import medicoRouter from "./routers/medico.router";
 import pacientesRouter from "./routers/pacientesRouter";
 import consultorioRouter from "./routers/consultorio.router";
@@ -11,19 +14,21 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
+// Swagger de citas
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Swagger de pacientes
 app.use(
   "/api-docs/pacientes",
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec),
 );
+
+// Rutas de la API
 app.use("/api/citas", citasRouter);
-
 app.use("/medicos", medicoRouter);
-
-// Rutas de Pacientes
 app.use("/api/pacientes", pacientesRouter);
-
-// Rutas de Consultorios
 app.use("/api/consultorios", consultorioRouter);
 
 app.get("/", (_req, res) => {
@@ -36,3 +41,4 @@ app.get("/", (_req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
 });
+
