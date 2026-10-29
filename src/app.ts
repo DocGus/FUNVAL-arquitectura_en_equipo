@@ -1,5 +1,7 @@
 
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger";
 import citasRouter from "./routers/citas.router";
 import medicoRouter from "./routers/medico.router";
 import pacientesRouter from "./routers/pacientesRouter";
@@ -9,6 +11,11 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(
+  "/api-docs/pacientes",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec),
+);
 app.use("/api/citas", citasRouter);
 
 app.use("/medicos", medicoRouter);
