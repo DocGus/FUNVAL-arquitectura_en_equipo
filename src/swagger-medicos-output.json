@@ -1,0 +1,250 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Medicos",
+    "description": "Documentación del módulo de médicos",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-api-key",
+      "description": "Clave de acceso a la API"
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Médicos"
+        ],
+        "description": "Endpoint para obtener la lista de todos los médicos registrados",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Médicos"
+        ],
+        "description": "Endpoint para registrar un nuevo médico",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos del médico que se desea registrar",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "matricula": {
+                  "type": "string",
+                  "example": "MED-001"
+                },
+                "nombreCompleto": {
+                  "type": "string",
+                  "example": "Juan Pérez"
+                },
+                "especialidad": {
+                  "type": "string",
+                  "example": "Cardiología"
+                },
+                "aniosExperiencia": {
+                  "type": "number",
+                  "example": 10
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": [
+          "Médicos"
+        ],
+        "description": "Endpoint para buscar un médico por su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador único del médico",
+            "example": 1
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Médicos"
+        ],
+        "description": "Endpoint para modificar los datos de un médico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador único del médico que se desea modificar",
+            "example": 1
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Nuevos datos del médico",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "matricula": {
+                  "type": "string",
+                  "example": "MED-001"
+                },
+                "nombreCompleto": {
+                  "type": "string",
+                  "example": "Juan Pérez"
+                },
+                "especialidad": {
+                  "type": "string",
+                  "example": "Neurología"
+                },
+                "aniosExperiencia": {
+                  "type": "number",
+                  "example": 12
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Médicos"
+        ],
+        "description": "Endpoint para eliminar un médico por su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Identificador único del médico que se desea eliminar",
+            "example": 1
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  }
+}

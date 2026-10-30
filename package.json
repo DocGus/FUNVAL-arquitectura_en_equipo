@@ -1,3 +1,4 @@
+
 {
   "name": "funval-arquitectura_en_equipo",
   "version": "1.0.0",
@@ -15,7 +16,8 @@
   "dependencies": {
     "express": "^5.3.0",
     "swagger-jsdoc": "^6.3.0",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "swagger-autogen": "^2.23.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
